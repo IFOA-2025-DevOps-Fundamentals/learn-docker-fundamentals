@@ -608,7 +608,689 @@ Some points associated with this analogy are:
   - *Containers (Docker)*: Conceptually similar to instances in OOP.
   - *Explanation*: Containers are the dynamic, runnable instances created from Docker images. They represent the execution environment for applications, much like instances in OOP are specific occurrences of a class with unique states.
 
-<!-- TODO: Restart from "Creating a New Image" -->
+
+## Creating a New Image
+
+To create a new image, we need to create a **Dockerfile** that contains the instructions for building the image.
+A Dockerfile is a text file containing instructions for building a Docker image. 
+It specifies the base image, desired configurations, and steps to set up the application.
+The building Command is: 
+
+```bash
+docker build -t <image_name>:<tag> .
+```
+
+The structure of this command is:
+
+- **docker build**: The command to build a new image.
+- **-t**: The flag to tag the image with a name and optional tag.
+- **<image_name>:<tag>**: The name and tag of the image.
+- **.**: The build context, specifying the location of the Dockerfile and associated files.
+
+An example Dockerfile is: 
+
+```Dockefile
+# Use an official base image
+FROM ubuntu:latest
+
+# Set the working directory
+WORKDIR /app
+
+# Copy Application Files & Requirements to /app
+COPY ./app /app
+COPY requirements.txt /app/requirements.txt
+
+# Install dependencies
+RUN apt-get update && apt-get install -y python3
+
+# Install Python Application Requirements
+RUN pip3 install -r requirements.txt
+
+# Define the default command
+CMD ["python3", "app.py"]
+```
+
+In this case we are using the `ubuntu` image as the base image, copying the current directory to the `/app` directory in the image,
+setting the working directory to `/app`, installing Python 3, and running the `app.py` script when the container starts.
+
+```Dockefile
+# Use an official base image
+FROM ubuntu:latest
+```
+
+This line specifies the base image for the new image.
+In our case, we are using the latest version of the Ubuntu image as the base image.
+
+```Dockefile
+# Set the working directory
+WORKDIR /app
+```
+
+The `WORKDIR` instruction sets the working directory for subsequent instructions in the Dockerfile.
+This directory is used as the default location for running commands and storing files when the container is started.
+
+```Dockefile
+# Copy Application Files & Requirements to /app
+COPY ./app /app
+COPY requirements.txt /app/requirements.txt
+```
+
+The `COPY` instruction copies files or directories from the host machine to the container.
+This operation is fundamental used to add application files and dependencies to the image.
+
+```Dockefile
+# Install dependencies
+RUN apt-get update && apt-get install -y python3
+
+# Install Python Application Requirements
+RUN pip3 install -r requirements.txt
+```
+
+The `RUN` instruction executes commands in the container during the build process.
+In our case we use the `apt-get` package manager to install Python 3 in the container since we would like to run a Python application.
+
+> [!NOTE]
+> 
+> **There are already images with Python installed, but we are using this example to show how to install packages in the image.**
+
+We use also the `RUN` command to install the Python application requirements using the `pip3` package manager and the 
+requirements.txt file that we copied to the `/app` directory.
+
+```Dockefile
+# Define the default command
+CMD ["python3", "app.py"]
+```
+
+The `CMD` instruction specifies the default command to run when the container starts.
+In our case, we are running the `app.py` script using Python 3 as the default command.
+
+Another option is to use the `ENTRYPOINT` instruction to specify the executable to run when the container starts.
+CMD and ENTRYPOINT are both instructions in a Dockerfile that define the default command to be executed when a container starts. 
+However, they serve slightly different purposes
+
+- **CMD Instruction**:
+  - The CMD instruction sets the default command and/or parameters for the container
+  - If a Dockerfile has multiple CMD instructions, **only the last one takes effect**
+  - CMD is typically used to provide default parameters for an executing container but **can be overridden** by specifying a command when running the container
+- **ENTRYPOINT Instruction**:
+  - The ENTRYPOINT instruction sets the executable to be run when the container starts
+  - Unlike CMD, the ENTRYPOINT command and its parameters **are not ignored when a command is specified at runtime**
+  - If a Dockerfile has multiple ENTRYPOINT instructions, **only the last one takes effect**
+<!-- ? Richiede approfondimento -->
+
+In summary, while both CMD and ENTRYPOINT can be used to define the default command, ENTRYPOINT is often used for specifying the main executable, 
+while CMD provides default arguments that can be overridden at runtime
+
+Other useful Dockerfile instructions are:
+
+- **EXPOSE**: Specifies the port on which the container listens for incoming connections.
+- **ENV**: Sets environment variables in the container.
+- **VOLUME**: Creates a mount point for a volume in the container. (we will talk about volumes later)
+- **USER**: Sets the user or UID to use when running the container.
+- **LABEL**: Adds metadata to the image.
+- **ARG**: Defines build-time variables.
+
+As previously presented we can execute the docker build command to create the Docker image.
+
+```bash
+docker build -t myapp:latest .
+```
+
+The Docker image is built layer by layer, following the instructions in the Dockerfile
+We can also Use the docker tag command to assign tags for versioning helping managing and track changes in the image over time.
+
+```bash
+docker tag myapp:latest myapp:v1.0
+```
+
+
+### Images History
+
+To view the history of a Docker image, you can use the following command:
+
+```bash
+docker history <image_name>:<tag>
+```
+
+The output will be something like:
+
+![image_history.png](images/image_history.png)
+
+### Building & Caching
+
+If you run the same build again, it will be instantaneous. Why?
+After each build step, Docker takes a snapshot of the resulting image.
+Before executing a step, Docker checks if it has already built the same sequence.
+Docker uses the exact strings defined in your Dockerfile, so:
+
+```bash
+RUN apt-get install figlet cowsay
+```
+
+is different from
+
+```bash
+RUN apt-get install cowsay figlet
+RUN apt-get update is not re-executed when the mirrors are updated <!-- ? Cosa significa? -->
+```
+
+You can force a rebuild with docker build `--no-cache` (e.g., `docker build --no-cache -t myapp:latest .`).
+
+### Namespaces & Images Management
+
+Docker uses namespaces to provide isolation and security for containers.
+There are three main namespaces:
+- **Official images**
+  - The root namespace is for official images. 
+  - They are gated by Docker Inc.
+  - They are generally authored and maintained by third parties.
+  - e.g. `ubuntu`, `mosquitto`, `busybox` ...
+- **User (and organizations) images**
+  - The user namespace holds images for Docker Hub users and organizations
+  - *Docker Hub Username*: jpetazzo 
+  - *Image Name*: clock
+  - e.g. `jpetazzo/clock`
+- **Self-hosted images**
+  - This namespace holds images which are not hosted on Docker Hub, but on third party registries.
+  - They contain the hostname (or IP address), and optionally the port, of the registry server.
+  - e.g. `registry.example.com:5000/my-private/image`
+
+Images can be stored:
+- On your Docker host
+- In a Docker registry
+
+You can use the Docker client to download (pull) or upload (push) images.
+>[!NOTE]
+> 
+> To be more accurate: you can use the Docker ***client*** to tell a Docker ***Engine*** to push and pull images to and from a registry.
+
+There are different Docker Registries and you can also have your own registry for example using external services such as GitLab that provides the possibility to push and pull your container images on a dedicated registry with both private and public access.
+
+
+
+### Listing Available Images
+
+To list the available images on your Docker host, you can use the following command:
+
+```bash
+docker images
+```
+
+The output will be something like:
+
+```bash
+REPOSITORY     TAG    IMAGE ID     CREATED       SIZE
+fedora         latest ddd5c9c1d0f2 3 days ago    204.7 MB
+centos         latest d0e7f81ca65c 3 days ago    196.6 MB
+ubuntu         latest 07c86167cdc4 4 days ago    188 MB
+redis          latest 4f5f397d4b7c 5 days ago    177.6 MB
+postgres       latest afe2b5e1859b 5 days ago    264.5 MB
+alpine         latest 70c557e50ed6 5 days ago    4.798 MB
+debian         latest f50f9524513f 6 days ago    125.1 MB
+busybox        latest 3240943c9ea3 2 weeks ago   1.114 MB
+training/namer latest 902673acc741 9 months ago  289.3 MB
+jpetazzo/clock latest 12068b93616f 12 months ago 2.433 MB
+```
+
+
+### Searching for Images
+
+We cannot list all images on a remote registry, but we can search for a specific keyword:
+- **Stars**: indicate the popularity of the image.
+- **Official**: images are those in the root namespace.
+- **Automated**: images are built automatically by the Docker Hub. (This means that their build is always available.)
+
+For example, to search for the `ubuntu` image, you can use the following command:
+
+```bash
+docker search ubuntu
+```
+
+The output will be something like:
+
+```text
+NAME                            DESCRIPTION                                     STARS   OFFICIAL
+ubuntu                          Ubuntu is a Debian-based Linux operating s...   10469   [OK]
+dorowu/ubuntu-desktop-lxde-vnc  Ubuntu with openssh-server and NoVNC            126
+rastasheep/ubuntu-sshd          Dockerized SSH service, built on top of of...   108     [OK]
+consol/ubuntu-xfce-vnc          Ubuntu container with "headless" VNC sessi...   107
+ubuntu-upstart                  Upstart is an event-based replacement for ...   73      [OK]
+ansible/ubuntu14.04-ansible     Ubuntu 14.04 LTS with ansible                   100
+ubuntu-debootstrap              debootstrap --variant=minbase --components...   26      [OK]
+nuagebec/ubuntu                 Simple always updated Ubuntu docker images...   24      [OK]
+```
+
+
+### Downloading Images
+
+Images can be built from scratch or pulled from a registry.
+Downloading an image is called pulling an image.
+This process downloads the image from a registry to your local Docker host in order to create containers from it and run applications.
+
+There are two ways to download images: 
+- **Explicitly**, with **docker pull**
+- **Implicitly**, when executing **docker run** and the image is not found locally.
+
+To pull an image explicitly, you can use the following command:
+
+```bash
+docker pull <image_name>:<tag>
+```
+
+For example, to pull the `ubuntu` image with the `latest` tag, you can use the following command:
+
+```bash
+docker pull ubuntu:latest
+```
+
+The output will be something like:
+
+```bash
+latest: Pulling from library/ubuntu
+d0e7f81ca65c: Pull complete
+07c86167cdc4: Pull complete
+07c86167cdc4: Pulling metadata
+07c86167cdc4: Pulling fs layer
+07c86167cdc4: Download complete
+```
+
+As you can see, the image is pulled from the `library/ubuntu` repository, which is the default repository for official images.
+And layers are downloaded one by one and then the image is downloaded and ready to be used.
+
+
+### Images and Tags
+
+Images can have tags to differentiate between different versions or configurations of the same image.
+Tags define image versions or variants.
+Without a tag, Docker will assume the `latest` tag by default.
+For example `docker pull ubuntu` will refer to `ubuntu:latest`. The :latest tag is generally updated often.
+As best practice we can follow some (simple) guidelines for tagging images:
+
+- **Don't specify tags**:
+  - When doing *rapid testing* and *prototyping*.
+  - When *experimenting*.
+  - When you *want* the latest version.
+- **Do specify tags**:
+  - When recording a procedure into a script.
+  - When going to ***production***.
+  - To ensure that the ***same version*** will be used everywhere.
+  - To ensure ***repeatability*** later.
+
+This is similar to what we would do with pip install, npm install, etc.
+
+
+### Images and Multiple Architectures
+
+Docker images can be built for different architectures.
+For example, an image can be built for both x86 and ARM architectures or it can be built for a specific architecture.
+When pulling an image, Docker will **automatically pull the image for the architecture of the host machine**.
+This topic is relevant when working with multi-architecture environments or when building images for specific platforms.
+For example recent Raspberry Pi models use ARM architecture and we need to build images for ARM architecture.
+
+Docker uses **tags to specify the architecture** of an image.
+For example `ubuntu:latest` is the image for the x86 architecture, while `ubuntu:arm64` is the image for the ARM64 architecture.
+We can also refer to the architecture in the image name, such as `arm64v8/ubuntu:latest` through the following command:
+
+```bash
+docker pull arm64v8/ubuntu:latest
+```
+
+or using the --platform flag:
+
+```bash
+docker pull --platform linux/arm64 arm64v8/ubuntu:latest
+```
+
+
+### Networking
+
+Containers run in isolated environments but may need to communicate with each other or external systems.
+Docker uses built-in networking features to enable communication between containers and the outside world.
+
+Networking on Docker and in general with containers is a complex topic and here we are going to introduce some basic concepts.
+Additional notes and concepts about Docker networking can be found on the official web site at the following link: 
+[https://docs.docker.com/engine/network/](https://docs.docker.com/engine/network/)
+
+When a Docker container is created, it is connected to the default *bridge network*
+  - **Bridge Network** Characteristics:
+    - Containers on the same bridge network can communicate with each other
+    - Containers on different bridge networks are isolated by default
+  - Each Container has an IP: Containers on the same network have unique IP addresses. Example: 172.17.0.2, 172.17.0.3, etc
+  - Port Mapping: Use `-p` or `--publish` to map container ports to host ports, enabling external access.
+  - Example: `docker run -p 8080:80 mywebapp`
+
+The port mapping allows the container to **be accessed from the host machine** using the specified port.
+The `p` or `--publish` flag is used to map container ports to host ports, enabling external access.
+For example, the command `docker run -p 8080:80 mywebapp` maps port 80 in the container to port 8080 on the host machine.
+The port can be the same or different on the host and container in this way we can have multiple containers running on the same host machine or
+customize the port mapping for different services or on different environments.
+
+A visual representation of the default bridge network is shown below:
+
+![docker_networking_bridge.png](images/docker_networking_bridge.png)
+
+The bridge allows containers to communicate with each other, but ***not with the host machine or external systems***. <!-- ? Contraddice il punto sotto? -->
+For example in the previous example, the container can be accessed from the host machine using the `localhost:8080` address.
+
+Some additional notes and concepts about Docker networking are:
+
+- **Host Localhost**:
+  - On a traditional host machine, "localhost" typically refers to the loopback network interface (IP address 127.0.0.1).
+  - This loopback interface allows processes on the host to communicate with each other locally without going through the network stack.
+- **Container Localhost**:
+  - When you run a container, it has its own isolated network namespace. Inside the container, the loopback interface also exists, and ***"localhost" refers to the container itself***.
+  - **Containers have their own IP addresses, and the loopback interface inside a container points to the container's IP address.** <!-- ? Conseguenze? -->
+- **Host-to-Container Communication**:
+  - By default, containers can communicate with the host and each other through their respective IP addresses.
+  - If a service inside a container is exposed on a specific port, you can access it from the host machine using the container's IP address and the mapped port.
+- **Using "localhost" Inside a Container**:
+  - If a process inside a container tries to connect to "localhost," it refers to the loopback interface within the container itself.
+  - This can be problematic *if the process expects to connect to a service running on the host's loopback interface*.
+- **Solutions and Considerations**:
+  - To access services running on the host from inside a container, you might need to use the host machine's IP address.
+  - Alternatively, using the **special hostname** `host.docker.internal` (available on Docker for Windows, Docker for Mac, and Docker Desktop) allows containers to reach services on the host. <!-- ? E su Linux?-->
+
+In Docker multiple virtual networks can be created to isolate containers and control communication between them.
+We can have the following main configurations: 
+
+- **Default Bridge Network:** Docker creates a default bridge network when you run containers without specifying a network.
+  - `docker run -d --name container1 myimage1`
+  - `docker run -d --name container2 myimage2`
+- **Custom Bridge Network:** You can create a custom bridge network using docker network create and then connect containers to it.
+  - `docker network create mynetwork`
+  - `docker run -d --name container1 --network=mynetwork myimage1`
+  - `docker run -d --name container2 --network=mynetwork myimage`
+- **Host Networking Mode:** Use the host networking mode to share the host's network stack.
+  - `docker run -d --network host myimage`
+
+The host networking mode allows the container to share the host's network stack, including the IP address and network interfaces.
+This mode can be useful when you want to run a container that requires access to the host's network configuration or services.
+It is not the best practice because it can expose the container to potential security risks but it can be useful in some specific cases.
+
+**If two containers are connected to the same network, they can communicate with each other using the service name as the hostname.
+This is fundamental and avoids the need to use IP addresses to communicate between containers.**
+Two container on the default bridge network can communicate with each other using the container name as hostname.
+
+Without the use of the same network and using IP addresses, the communication between containers can be complex and error-prone.
+If two containers are not using service names, they must communicate using IP addresses. This can be less flexible as IP addresses may change.
+For example in this scenario:
+
+```mermaid
+graph TD
+    subgraph Network: my_network
+        direction LR
+        WebServiceIP[Web Service: python_web_app - IP: 172.18.0.2]
+        DatabaseServiceIP[Database Service: mysql_db - IP: 172.18.0.3]
+    end
+
+    WebServiceIP -->|mysql://myuser:mypassword @172.18.0.3:3306/mydatabase| DatabaseServiceIP
+    DatabaseServiceIP -->|Response| WebServiceIP
+```
+
+The Web Service container needs to know the IP address of the Database Service container to establish a connection.
+**If the IP address changes, the Web Service container must be updated with the new IP address.**
+
+Using the same network and service names, the communication between containers is simplified and more flexible.
+The same scenario can be represented as follows:
+
+```mermaid
+graph TD
+    subgraph Network: my_network
+        direction LR
+        WebService[Web Service: python_web_app]
+        DatabaseService[Database Service: mysql_db]
+    end
+
+    WebService -->|SQL Connection: mysql://myuser:mypassword@mysql_db:3306/mydatabase| DatabaseService
+    DatabaseService -->|Response| WebService
+```
+
+
+### Volumes
+
+Docker volumes are used to persist data generated by and used by Docker containers.
+Like networking is a complex topic and here we are going to introduce some basic concepts.
+Additional notes and concepts about Docker can be found on the official web site at the following link
+[https://docs.docker.com/engine/storage/volumes/](https://docs.docker.com/engine/storage/volumes/).
+
+Why use volumes?
+- **Persistence:** Data stored in volumes persists beyond the lifecycle of the container, ensuring that valuable information is not lost when a container stops or is removed
+- **Shared Data:** Volumes facilitate the sharing of data among containers, promoting collaboration and efficient data management
+
+In this playground we refer to the **Host Bind Mounts:** allow us to mount a directory from the host machine into a container. 
+They provide a way to share data between the host and the container. 
+
+Volumes can also be created using the -v option during container creation
+For example: 
+
+```bash
+docker run -v mydata:/app/data myimage
+```
+
+This command uses a local folder called `mydata` and mounts it to the `/app/data` directory in the container.
+In this way the data is shared between the host and the container.
+This kind of volumes can be used for example to: 
+- Share configuration files between the host and the container (e.g., configuration to handle MQTT connection parameters)
+- Share data between the host and the container (e.g., data generated by the application)
+- Share logs between the host and the container (e.g., logs generated by the application)
+- Share code between the host and the container (e.g., code to be executed by the application) during the development phase
+- Share folder to persist data generated by the application or databases containers (a MySql database, a MongoDB database, etc.)
+
+
+### Docker Compose
+
+There are scenarios where we need to run multiple containers that work together to provide a complete application.
+Handling multiple containers can be complex, especially when we need to manage their dependencies and configurations.
+
+>[!NOTE]
+> Docker Compose is a tool that ***simplifies the process of defining and running multi-container*** Docker applications.
+
+Key Features are:
+- **Declarative Configuration**: Define services, networks, and volumes in a YAML file
+- **Single Command**: Use for example docker-compose up to start and initialize the entire application stack
+
+It is possible to define services and their deployment in terms of image, ports, volumes, and environment variables
+
+Other different solutions and systems to manage containers and containerized applications are available, such as **Kubernetes**, **OpenShift**, and **Docker Swarm**. 
+In this playground we are going to use Docker Compose to manage the containers and the application stack.
+
+Docker compose works with a YAML file called `docker-compose.yml` that defines the services, networks, and volumes for the application stack.
+For example if we want to create a simple deployment where we have a Python container and a MySQL container we can define the following `docker-compose.yml` file:
+
+```yaml
+version: '3.8'
+
+services:
+  web:
+    image: myapp:1.0
+    container_name: python_web_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./config:/app/config
+    networks:
+      - my_network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    volumes:
+      - ./db_data:/var/lib/mysql
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+```
+
+Now we are going to analyze the content of the `docker-compose.yml` file in order to understand the structure and the content.
+
+```yaml
+version: '3.8'
+```
+Specifies the version of the Docker Compose file format. 
+Version 3.8 is used here, which is compatible with Docker Engine version 19.03.0 and above.
+
+The next step is to define the services to be run in the Docker containers.
+
+```yaml
+web:
+    image: myapp:1.0
+    container_name: python_web_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./config:/app/config
+    networks:
+      - my_network
+    depends_on:
+      - db
+```
+
+Involves the following key elements:
+
+- `image`: Specifies the Docker image to use for the container. Here, it uses `myapp:1.0` previously built and available on the Docker host (if the image is not available, Docker Compose will pull it from a registry).
+- `container_name`: Sets the name of the container to `python_web_app`.
+- `ports`: Maps port 5000 of the container to port 5000 on the host machine.
+- `volumes`: Mounts host directories into the container:
+  - `./config:/app/config`: Mounts the `config` directory on the host to `/app/config` in the container.
+- `networks`: Connects the container to the `my_network` network (if the network does not exist, Docker Compose will create it).
+- `depends_on`: Ensures that the `db` service starts before the `web` service. This allows the `web` service to wait for the `db` service to be ready before starting.
+
+For second microservice, the `db` service, the following key elements are defined:
+
+```yaml
+db:
+  image: mysql:8.0
+  container_name: mysql_db
+  restart: always
+  environment:
+    MYSQL_ROOT_PASSWORD: rootpassword
+    MYSQL_DATABASE: mydatabase
+    MYSQL_USER: myuser
+    MYSQL_PASSWORD: mypassword
+  volumes:
+    - ./db_data:/var/lib/mysql
+  networks:
+    - my_network
+```
+
+- `image`: Specifies the Docker image to use for the container. Here, it uses `mysql:8.0`.
+- `container_name`: Sets the name of the container to `mysql_db`.
+- `restart`: Always restarts the container if it stops.
+- `environment`: Sets environment variables for MySQL (the support for environment variables is specific to the MySQL image and the associated Dockerfile and its documentation on Docker Hub).
+  - `MYSQL_ROOT_PASSWORD`: Sets the root password for the MySQL database.
+  - `MYSQL_DATABASE`: Specifies the name of the default database to create.
+  - `MYSQL_USER`: Specifies the name of the user.
+  - `MYSQL_PASSWORD`: Sets the password for the user.
+- `volumes`: Mounts the `db_data` directory on the host to `/var/lib/mysql` in the container. This allows MySQL data to persist between container restarts (also this is a best practice to persist data generated by the database and the correct path is documented on the container information).
+- `networks`: Connects the container to the `my_network` network.
+
+The fact that the `web` service depends on the `db` service ensures that the ***database service starts before the web service***.
+Furthermore, if two containers are connected to the same network, they can communicate with each other using the service name as the hostname.
+This is fundamental and ***avoids the need to use IP addresses to communicate between containers***.
+See Section [Docker & Networking](#docker--networking) for more information.
+
+The next section of the docker compose file defines the custom bridge network that the services will use to communicate with each other.
+
+```yaml
+networks:
+  my_network:
+    driver: bridge
+```
+
+The above portion of the configuration defines a custom bridge network named `my_network` that the services will use to communicate with each other.
+
+As additional notes: 
+
+- Ensure the `./app`, `./config`, and `./db_data` directories ***exist on your host machine***.
+- You can adjust the paths and environment variables as needed for your specific setup.
+- To bring up the application, run `docker-compose up` (or `docker compose up`) in the directory containing this Docker Compose file (See next Sub-Sections).
+
+
+#### Docker Compose Usage
+
+Run the application described in the compose file
+
+```bash
+docker-compose up
+```
+
+You can also run the application as a daemon in background
+
+```bash
+docker-compose up -d
+```
+
+You can view active containers associated to the composed application: 
+
+```bash
+docker-compose ps
+```
+
+To view the logs of all running containers at once, run the following command:
+
+```bash
+docker-compose logs
+```
+
+To view the logs of a specific target docker compose SERVICE NAME (not container name) by its name, run the following command:
+
+```bash
+docker-compose logs python_web_app
+```
+
+To retrieve the four most recent lines of the log from all running containers, run the following command:
+
+```bash
+docker-compose logs --tail=4
+```
+
+We can continuously watch the log output in real-time by passing the -f (short for "--follow") flag to the docker-compose logs command. Run the following command to stream the logs:
+
+```bash
+docker-compose logs -f --tail=4
+```
+
+To view the logs generated until five minutes ago, run the following command:
+
+```bash
+docker-compose logs --until=5m
+```
+
+For example, to view logs that occurred between 3 P.M. and 4 P.M on May 31st, run the following command:
+
+```bash
+docker-compose logs –since=2023-05-31T15:00:00 –until=2023-05-31T16:00:00
+```
+
+You can stop the entire application with all its container using:
+
+```bash
+docker-compose down
+```
+
+You can stop, remove everything with the following command: 
+
+```bash
+docker-compose rm -fsv
+```
+
+>[!NOTE]
+>
+> In recent version, `docker-compose` has been replaced with `docker compose`.
+
+
+<!-- TODO: restart from "Build Our First Docker Application" -->
 
 
 <!-- TODO: Use the following containers for examples: -->
