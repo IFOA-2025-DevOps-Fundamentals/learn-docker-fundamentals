@@ -1,6 +1,6 @@
 ## Build Our First Docker Application
 
-In the myapp folder there is a simple Python application that we are going to containerize using Docker.
+In the myapp folder (stored in `assets/code/myapp`) there is a simple Python application that we are going to containerize using Docker.
 This project shows a demo implementation of a simple HTTP RESTful API with a single endpoint that returns a JSON response.
 
 The implementation is based on the following Python Frameworks 
@@ -54,7 +54,8 @@ CMD [ "python3", "api_server.py" ]
 
 In this example with respect to the previously presented Dockerfile we used:
 
-- The `python:3.9-slim-buster` image as the base image instead of the `ubuntu` image and we do not need to install Python 3. More information about the image on DockerHub [here](https://hub.docker.com/layers/library/python/3.9-slim-buster/images/sha256-55dee265c5c84ca9c425776321de4caefa31ed11cb8626d96862c0dae7a67e99), about the base OS [here](https://hub.docker.com/_/debian) (at the *image variants* section), and [here](https://medium.com/@arif.rahman.rhm/choosing-the-right-python-docker-image-slim-buster-vs-alpine-vs-slim-bullseye-5586bac8b4c9)
+- The `python:3.9-slim-buster` image as the base image instead of the `ubuntu` image and we do not need to install Python 3. 
+More information about the image on DockerHub [here](https://hub.docker.com/layers/library/python/3.9-slim-buster/images/sha256-55dee265c5c84ca9c425776321de4caefa31ed11cb8626d96862c0dae7a67e99), about the base OS [here](https://hub.docker.com/_/debian) (at the *image variants* section), and [here](https://medium.com/@arif.rahman.rhm/choosing-the-right-python-docker-image-slim-buster-vs-alpine-vs-slim-bullseye-5586bac8b4c9)
 - The `EXPOSE` instruction exposes port 7070, which is the port on which the API server will run. This is just a declaration and does not actually publish the port that is done when running the container. <!-- ? Cosa significa? -->
 - The `PYTHONPATH` variable ensures that Python can find and import modules from the /app directory. 
 - The `PYTHONUNBUFFERED` variable ensures that all output from the application is immediately flushed to 
@@ -176,11 +177,9 @@ Press CTRL+C to quit
 
 As you can see the application is running and the API server is listening on the port 7070.
 The reported IP addresses are the localhost and the container IP address but the API server is accessible from host machine using the host IP address and the port 7070.
-This is due to the fact that the container is running in a bridge network and the port is exposed to the host machine
-with the `-p 7070:7070` parameter.
+This is due to the fact that the container is running in a bridge network and the port is exposed to the host machine with the `-p 7070:7070` parameter.
 
-Now you can access the API using the following URL: [http://localhost:7070/api/iot/test](http://localhost:7070/api/iot/test)
-and you should receive the following response:
+Now you can access the API using the following URL: [http://localhost:7070/api/iot/test](http://localhost:7070/api/iot/test) and you should receive the following response:
 
 ```json
 {
