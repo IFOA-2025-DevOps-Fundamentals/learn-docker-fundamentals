@@ -1,0 +1,9 @@
+services:
+  snippet-Box:
+    image: pawelmalak/snippet-box
+    container_name: Snippet-Box
+    restart: unless-stopped
+    volumes:
+      - ./snippet-box-volume/data:/app/data
+    ports:
+      - 5000:5000
