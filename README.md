@@ -53,11 +53,6 @@ The outline of the course is as follows:
   - [Run the Container with Configuration File](sections/07_build_our_first_docker_app.md#run-the-container-with-configuration-file)
   - [Stop & Remove the Container](sections/07_build_our_first_docker_app.md#stop--remove-the-container)
 
-
-<!-- TODO: Use the following containers for examples: -->
-<!-- TODO: - Portainer -->
-<!-- TODO: - UptimeKuma -->
-<!-- TODO: - Snippetbox -->
 <!-- TODO: - Add section comparing different container technologies -->
 
 ---
