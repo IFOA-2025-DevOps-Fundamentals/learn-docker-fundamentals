@@ -1,6 +1,5 @@
 # Docker Fundamentals
-A gentle introduction to Docker, containers creation and management, 
-and containerized development.
+A gentle introduction to Docker, containers creation and management, and containerized development.
 
 ## Course Goals
 The course contained in this repository is meant to provide a basic understanding 
