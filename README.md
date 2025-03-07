@@ -55,7 +55,6 @@ The outline of the course is as follows:
 
 
 <!-- TODO: Use the following containers for examples: -->
-<!-- TODO: - jpetazzo/clock -->
 <!-- TODO: - Portainer -->
 <!-- TODO: - UptimeKuma -->
 <!-- TODO: - Snippetbox -->

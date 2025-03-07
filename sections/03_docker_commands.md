@@ -203,7 +203,7 @@ There are several ways to restart a container:
 
 As previously explained some of these commands and options effective and available on Linux because of the shell syntax.
 
-## Experiment!
+## Let's Experiment!
 >[!TIP]
 > 
 > Test Docker commands using the `jpetazzo/clock` image! 

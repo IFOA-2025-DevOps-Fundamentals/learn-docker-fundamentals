@@ -412,3 +412,6 @@ or using the --platform flag:
 ```bash
 docker pull --platform linux/arm64 arm64v8/ubuntu:latest
 ```
+
+## Let's Experiment!
+Test the viewed commands using the command line or the command line offered by Docker Desktop! 

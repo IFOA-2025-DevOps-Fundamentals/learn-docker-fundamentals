@@ -1,4 +1,4 @@
-## Build Our First Docker Application
+## Let's Experiment! Build Our First Docker Application
 
 In the myapp folder (stored in `assets/code/myapp`) there is a simple Python application that we are going to containerize using Docker.
 This project shows a demo implementation of a simple HTTP RESTful API with a single endpoint that returns a JSON response.

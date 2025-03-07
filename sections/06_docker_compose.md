@@ -208,3 +208,18 @@ docker-compose rm -fsv
 >[!NOTE]
 >
 > In recent version, `docker-compose` has been replaced with `docker compose`.
+
+## Let's Experiment!
+Now try to create the following services: 
+- Portainer (more info [here](https://docs.portainer.io/start/install-ce/server/docker/linux))
+- Uptime-Kuma (more info [here](https://uptime.kuma.pet/))
+- Snippet-Box (more info [here](https://github.com/pawelmalak/snippet-box))
+
+Part of the exercise is to find the image online to retrieve its name and the selected version.
+
+Finally, setup your working environment on VSCode and implement the service: 
+- [ ] make a folder for each service you want to implement; 
+- [ ] inside of each folder, create a `docker-compose.yaml` file; 
+- [ ] if necessary, in the compose file specify binded folders names ending with `-volume` (e.g., for Portainer the created folder containing the service data can be name `portainer-volume`);
+- [ ] Run the container, and check the result!
+
