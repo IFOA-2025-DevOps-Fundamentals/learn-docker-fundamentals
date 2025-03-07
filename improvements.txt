@@ -1,0 +1,3 @@
+- [ ] Make all titles in each section a first level titles
+- [ ] Add the TOC in each subsection
+- [ ] Check for all "docker" words being lowercase
