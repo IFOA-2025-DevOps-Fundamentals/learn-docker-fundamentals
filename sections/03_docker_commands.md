@@ -202,3 +202,8 @@ There are several ways to restart a container:
   - *Use Case*: Mitigates issues and allows time for troubleshooting before automatic restart attempts.
 
 As previously explained some of these commands and options effective and available on Linux because of the shell syntax.
+
+## Experiment!
+>[!TIP]
+> 
+> Test Docker commands using the `jpetazzo/clock` image! 

@@ -125,12 +125,6 @@ root@04c0bb0a6c07:/# figlet hello
 The output will be:
 ![img.png](../assets/images/figlet_hello.png)
 
->[!TIP]
-> 
-> Now you can try to do the same with another simple terminal program: `neofetch`. 
-> 
-> Additional information about `neofetch` can be found [here](https://github.com/dylanaraps/neofetch).
-
 Now we can exit the container by logging out of the shell, with **^D** or exit.
 After the exit, try to run figlet again. Does that work? (It shouldn't; except if, by coincidence, you are running on a machine where figlet was installed before.)
 The reasons are:
@@ -144,3 +138,10 @@ The reasons are:
 > [!NOTE]
 > 
 > More information about `docker run` [here](https://docs.docker.com/reference/cli/docker/container/run/).
+
+## Experiment! 
+>[!TIP]
+> 
+> Now you can try to do the same with another simple terminal program: `neofetch`. 
+> 
+> Additional information about `neofetch` can be found [here](https://github.com/dylanaraps/neofetch).
