@@ -1,13 +1,10 @@
 ## Virtual Machines & Containers
 ![vms_vs_containers.png](../assets/images/vms_vs_containers.png)
 
-In the world of virtualization and cloud computing, 
-two primary technologies are widely used: **Virtual Machines (VMs)** and **Containers**. 
+In the world of virtualization and cloud computing, two primary technologies are widely used: **Virtual Machines (VMs)** and **Containers**. 
 Both have their unique characteristics and different use cases. 
-Understanding the differences between them is essential for choosing 
-the right technology for your infrastructure needs.
-Additional information and references can be found at the following link:
-[https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms)
+Understanding the differences between them is essential for choosing the right technology for your infrastructure needs.
+Additional information and references can be found at the following link: [https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms)
 
 ### Virtual Machines
 
@@ -107,3 +104,13 @@ Some of the main milestones in the history of containers are:
 - **FreeBSD Jails** (1999-2000): Introduced OS-level virtualization for FreeBSD systems.
 - **Docker** (2013): Revolutionized containerization with a user-friendly platform for building, sharing, and running containers.
 - *Kubernetes* (2014): Introduced container orchestration for managing and scaling containerized applications.
+
+## Why to contain? 
+
+- **Portability**: a container is comparable to an executable package. All relevant libraries are self-contained, can run on different systems (public or private cloud), a single deployment can be  moved from one environment to another with ease.
+- **Agility**: containers support natively DevOps approaches. There is a high availability of basic container services, and most of the times is only needed to add *configurations* and *service-specific code*.  
+- **Speed**: containers are *lightweight virtualization*. Sharing the same OS as host ensures fast startup time, no need to reboot OS for container restart, reduced overhead, lower costs because of the overall higher efficiency. 
+- **Fault isolation**: each container is an *isolated* environment. Failures in one container do not affect other containers nor the host OS (e.g., faulty consumption of all available resources), supporting troubleshooting.
+- **Efficiency**: related to speed. Lower overhead, faster access to resources, ...
+- Ease of management: containers can be *orchestrated*. It means that their management can be automatized in activities such as installation, scaling, startup and shutdown. Several platforms allow for that, like the Docker Ecosystem or Kubernetes. 
+- **Security**: in containers, it is *hard for malicious code to propagate*, because of *isolation*. Other containers are isolated from infected ones, as well as the host machine. Permissions management and resources limitations can prevent DoS attacks. 

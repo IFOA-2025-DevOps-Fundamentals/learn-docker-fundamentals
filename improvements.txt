@@ -1,3 +1,7 @@
+General:
 - [ ] Make all titles in each section a first level titles
 - [ ] Add the TOC in each subsection
 - [ ] Check for all "docker" words being lowercase
+
+For ITS: 
+- [ ] Add DevOps introduction from STABILI-SAC/MAIN/2-Containers.pdf#DevOps
