@@ -105,7 +105,7 @@ Some of the main milestones in the history of containers are:
 - **Docker** (2013): Revolutionized containerization with a user-friendly platform for building, sharing, and running containers.
 - *Kubernetes* (2014): Introduced container orchestration for managing and scaling containerized applications.
 
-## Why to contain? 
+## Why to Contain? 
 
 - **Portability**: a container is comparable to an executable package. All relevant libraries are self-contained, can run on different systems (public or private cloud), a single deployment can be  moved from one environment to another with ease.
 - **Agility**: containers support natively DevOps approaches. There is a high availability of basic container services, and most of the times is only needed to add *configurations* and *service-specific code*.  

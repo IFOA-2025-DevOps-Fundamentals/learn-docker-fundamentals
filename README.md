@@ -15,6 +15,7 @@ The outline of the course is as follows:
   - [Containers](sections/01_virtual_machines_and_containers.md#containers)
   - [Key Differences & Comments](sections/01_virtual_machines_and_containers.md#key-differences--comments)
   - [Container History & First Experiments](sections/01_virtual_machines_and_containers.md#container-history--first-experiments)
+  - [Why to Contain?](sections/01_virtual_machines_and_containers.md#why-to-contain)
 - [Docker](sections/02_docker.md)
   - [Installing Docker](sections/02_docker.md#installing-docker)
   - [Create First Container](sections/02_docker.md#create-first-container)
