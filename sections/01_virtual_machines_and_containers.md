@@ -91,9 +91,7 @@ In many modern applications, a combination of both technologies is used to lever
 
 ### Container History & First Experiments
 
->Computer containers are lightweight, portable, and executable software packages 
->that encapsulate applications and their dependencies, 
->ensuring consistent and efficient deployment across various computing environments.
+>Computer containers are lightweight, portable, and executable software packages that encapsulate applications and their dependencies, ensuring consistent and efficient deployment across various computing environments.
 
 
 The evolution of containers has been a significant milestone in software development and deployment practices.
@@ -114,3 +112,50 @@ Some of the main milestones in the history of containers are:
 - **Efficiency**: related to speed. Lower overhead, faster access to resources, ...
 - Ease of management: containers can be *orchestrated*. It means that their management can be automatized in activities such as installation, scaling, startup and shutdown. Several platforms allow for that, like the Docker Ecosystem or Kubernetes. 
 - **Security**: in containers, it is *hard for malicious code to propagate*, because of *isolation*. Other containers are isolated from infected ones, as well as the host machine. Permissions management and resources limitations can prevent DoS attacks. 
+
+## Main Containerization Technologies
+
+### 1. **Docker**
+- **Description**: The most popular containerization technology. Docker allows you to create, deploy and manage containers in a simple and standardized way. It has a rich ecosystem of tools such as Docker Compose for managing multi-container applications.
+- **Strengths**: Easy to use, supported by a large community, complete ecosystem (*Docker Hub*, *Docker Swarm*).
+
+### 2. **Kubernetes**
+- **Description**: A container orchestration platform. Kubernetes manages and automates the deployment, scaling and management of containers at scale.
+- **Container types**: Kubernetes can orchestrate different types of containers, provided they are compliant with the OCI (Open Container Initiative) standard. The main types of containers that Kubernetes can manage include:
+    - Container `Docker`
+    - Container `OCI` (*Open Container Initiative*, as Podman)
+    - Container `CRI-O` (Kubernetes specific)
+    - Container `containerd` (developed by Docker and now part of the CNCF - Cloud Native Computing Foundation)
+    - Container `Firecracker` (developed by AWS, mix between a container and a VM, via `Kata Containers` and `Firekube`)
+- **Strengths**: Scalability, high availability, supports multi-cloud environments, advanced workload management.
+
+### 3. **Podman**
+- **Description**: An alternative to Docker, with the same command line syntax but without the need for a central daemon. Podman is designed to be rootless (without administrator privileges), improving security.
+- **Strengths**: Does not require a running daemon, Docker compatibility, advanced security.
+
+### 4. **OpenShift**
+- **Description**: Built on Kubernetes, OpenShift is a container orchestration platform that adds management, security, and configuration capabilities. It is developed by Red Hat.
+- **Strengths**: Integration with other Red Hat tools, built-in security, advanced application lifecycle management.
+
+### 5. **Docker Swarm**
+- **Description**: A Docker-native container orchestration solution. Docker Swarm allows you to manage multiple containers across multiple nodes, although it is not as advanced as Kubernetes.
+- **Strengths**: Native Docker integration, easy configuration for small to medium deployments.
+
+### 6. **Containerd**
+- **Description**: An open source container runtime that manages the container lifecycle from creation to execution. It is the basis of many other technologies such as Docker and Kubernetes.
+- **Strengths**: Lightweight, focused only on running containers (unlike Docker which also includes image management).
+
+### 7. **Rkt (pronounced "Rocket")**
+- **Description**: A containerization technology developed by CoreOS, intended as an alternative to Docker with a focus on security and isolation.
+- **Strengths**: Simpler architecture, integrates the concept of "app containers".
+
+### 8. **LXC (Linux Containers)**
+- **Description**: A system-level containerization solution that allows you to create virtualized environments similar to virtual machines, but with lower overhead.
+- **Strengths**: Greater isolation than traditional containers, ability to run entire operating systems in a container.
+
+### 9. **Singularity**
+- **Description**: A containerization technology used primarily in high-performance computing (HPC) and science. It is designed to ensure portability of environments.
+- **Strengths**: Portability, ease of use, designed to run on HPC systems.
+
+Each technology has its own strengths and is chosen based on specific needs, such as ease of use, scalability, orchestration, and security level. 
+Make your choices consciously, according to the needs of each scenario and what each technology offers!
