@@ -24,7 +24,13 @@ customize the port mapping for different services or on different environments.
 
 A visual representation of the default bridge network is shown below:
 
-![docker_networking_bridge.png](../assets/images/docker_networking_bridge.png)
+
+<div align="center">
+  <img src="../assets/images/docker_networking_bridge.png" width="700">
+  <br>
+  <br>
+</div>
+
 
 The bridge allows containers to communicate with each other, but ***not with the host machine or external systems***. <!-- ? Contraddice il punto sotto? -->
 For example in the previous example, the container can be accessed from the host machine using the `localhost:8080` address.

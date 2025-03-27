@@ -17,7 +17,13 @@ This layered approach enables efficient caching, reusability, and smaller increm
 
 A visual text based representation of the layered architecture is shown below:
 
-![docker_layers.png](../assets/images/docker_layers.png)
+
+<div align="center">
+  <img src="../assets/images/docker_layers.png" width="500">
+  <br>
+  <br>
+</div>
+
 
 In the layered architecture, ***each instruction*** in the Dockerfile creates a ***new layer*** in the image.
 When a new image is built, Docker ***reuses existing layers from the cache***, only rebuilding the layers that have changed.
@@ -45,7 +51,13 @@ For example `latest`, `1.0`, or `stable`. A semantic versioning pattern is often
 
 A visual representation of the main Pull and Push concepts together with the idea of Docker registry is shown below ([Source](https://www.tutorialspoint.com/docker/docker_hub.htm)):
 
-![docker_image_push_pull.png](../assets/images/docker_image_push_pull.png)
+
+<div align="center">
+  <img src="../assets/images/docker_image_push_pull.png" width="600">
+  <br>
+  <br>
+</div>
+
 
 ### Containers vs Images
 
@@ -70,7 +82,13 @@ As a general rule of thumb, **images** are used for **distribution and sharing**
 
 From the **same image** we then can create **multiple containers**, each with its own isolated environment and runtime characteristics as illustrated below:
 
-![same_image_multiple_containers.png](../assets/images/same_image_multiple_containers.png)
+
+<div align="center">
+  <img src="../assets/images/same_image_multiple_containers.png" width="600">
+  <br>
+  <br>
+</div>
+
 
 ### Object-Oriented Programming & Containers
 
@@ -230,9 +248,12 @@ To view the history of a Docker image, you can use the following command:
 docker history <image_name>:<tag>
 ```
 
-The output will be something like:
 
-![image_history.png](../assets/images/image_history.png)
+The output will be something like:
+<div align="center">
+  <img src="../assets/images/image_history.png" width="600">
+</div>
+
 
 ### Building & Caching
 

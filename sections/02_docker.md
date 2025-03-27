@@ -42,7 +42,11 @@ From an internal point of view Docker Desktop:
 
 An example of the Docker Desktop GUI is shown below:
 
-![docker_desktop.png](../assets/images/docker_desktop.png)
+
+<div align="center">
+    <img src="../assets/images/docker_desktop.png">
+</div>
+
 
 ### Create First Container
 
@@ -63,7 +67,11 @@ If you don't have the `busybox` image locally, Docker will download it from the 
 
 The output of the command will be like:
 
-![img_1.png](../assets/images/docker_hello_world.png)
+
+<div align="center">
+    <img src="../assets/images/docker_hello_world.png" width="600">
+</div>
+
 
 ### Create an Ubuntu Container
 
@@ -123,7 +131,14 @@ root@04c0bb0a6c07:/# figlet hello
 ```
 
 The output will be:
-![img.png](../assets/images/figlet_hello.png)
+
+
+<div align="center">
+    <img src="../assets/images/figlet_hello.png" width="500">
+    <br>
+    <br>
+</div>
+
 
 Now we can exit the container by logging out of the shell, with **^D** or exit.
 After the exit, try to run figlet again. Does that work? (It shouldn't; except if, by coincidence, you are running on a machine where figlet was installed before.)
