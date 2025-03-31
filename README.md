@@ -13,6 +13,7 @@ The outline of the course is as follows:
 - [Virtual Machines & Containers](sections/01_virtual_machines_and_containers.md)
   - [Virtual Machines](sections/01_virtual_machines_and_containers.md#virtual-machines)
   - [Containers](sections/01_virtual_machines_and_containers.md#containers)
+  - [Main Containerization Technologies](sections/01_virtual_machines_and_containers.md#main-containerization-technologies)
   - [Key Differences & Comments](sections/01_virtual_machines_and_containers.md#key-differences--comments)
   - [Container History & First Experiments](sections/01_virtual_machines_and_containers.md#container-history--first-experiments)
   - [Why to Contain?](sections/01_virtual_machines_and_containers.md#why-to-contain)
@@ -52,8 +53,6 @@ The outline of the course is as follows:
   - [Run the Container](sections/07_build_our_first_docker_app.md#run-the-container)
   - [Run the Container with Configuration File](sections/07_build_our_first_docker_app.md#run-the-container-with-configuration-file)
   - [Stop & Remove the Container](sections/07_build_our_first_docker_app.md#stop--remove-the-container)
-
-<!-- TODO: - Add section comparing different container technologies -->
 
 ---
 
