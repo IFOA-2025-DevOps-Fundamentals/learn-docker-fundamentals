@@ -17,10 +17,12 @@ The outline of the course is as follows:
   - [Key Differences & Comments](sections/01_virtual_machines_and_containers.md#key-differences--comments)
   - [Container History & First Experiments](sections/01_virtual_machines_and_containers.md#container-history--first-experiments)
   - [Why to Contain?](sections/01_virtual_machines_and_containers.md#why-to-contain)
+
 - [Docker](sections/02_docker.md)
   - [Installing Docker](sections/02_docker.md#installing-docker)
   - [Create First Container](sections/02_docker.md#create-first-container)
   - [Create an Ubuntu Container](sections/02_docker.md#create-an-ubuntu-container)
+
 - [Docker Commands](sections/03_docker_commands.md)
   - [Local Development & Working Environment](sections/03_docker_commands.md#local-development--working-environment)
   - [Docker Containers Working Modes](sections/03_docker_commands.md#docker-containers-working-modes)
@@ -30,6 +32,7 @@ The outline of the course is as follows:
   - [View the Last Started Container](sections/03_docker_commands.md#view-the-last-started-container)
   - [View Containers Logs](sections/03_docker_commands.md#view-containers-logs)
   - [Restart Containers](sections/03_docker_commands.md#restart-containers)
+
 - [Docker Images](sections/04_docker_images.md)
   - [Containers vs Images](sections/04_docker_images.md#containers-vs-images)
   - [Object-Oriented Programming & Containers](sections/04_docker_images.md#object-oriented-programming--containers)
@@ -42,11 +45,14 @@ The outline of the course is as follows:
   - [Downloading Images](sections/04_docker_images.md#downloading-images)
   - [Images & Tags](sections/04_docker_images.md#images-and-tags)
   - [Images and Multiple Architecture](sections/04_docker_images.md#images-and-multiple-architectures)
+
 - [Docker Networking & Volumes](sections/05_docker_networking_and_volumes.md)
   - [Networking](sections/05_docker_networking_and_volumes.md#networking)
   - [Volumes](sections/05_docker_networking_and_volumes.md#volumes)
+
 - [Docker Compose](sections/06_docker_compose.md#docker-compose)
   - [Docker Compose Usage](sections/06_docker_compose.md#docker-compose-usage)
+
 - [Build Our First Docker Application](sections/07_build_our_first_docker_app.md)
   - [Dockerfile](sections/07_build_our_first_docker_app.md#dockerfile)
   - [Build the Container](sections/07_build_our_first_docker_app.md#build-the-container)
