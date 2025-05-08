@@ -1,5 +1,5 @@
-## Docker Commands
-### Local Development & Working Environment
+# Docker Commands
+## Local Development & Working Environment
 
 When we use local VMs (with e.g. VirtualBox or VMware), our workflow looks like this:
 - create VM from base template (Ubuntu, CentOS...)
@@ -24,7 +24,7 @@ On the other hand with Containers and Docker the workflow looks like this:
 
 We have a clear definition of our environment, and can share it reliably with others.
 
-### Docker Containers Working Modes
+## Docker Containers Working Modes
 
 With Docker we have three main working modes:
 
@@ -52,7 +52,7 @@ With Docker we have three main working modes:
 
   Example Command: `docker run -d <image_name>`
 
-### List Running Containers
+## List Running Containers
 
 How can we check that our container is still running?
 With `docker ps`, just like the UNIX `ps` command, lists running processes.
@@ -74,7 +74,7 @@ Docker tells us:
 - That our container has been **running** (***Up***) for a couple of minutes.
 - ***Other information*** (COMMAND, PORTS, NAMES) that we will explain later.
 
-### Stop Containers
+## Stop Containers
 
 There are several ways to stop a container:
 
@@ -97,7 +97,7 @@ There are several ways to stop a container:
 
 Some of these commands and options effective and available on Linux because of the shell syntax.
 
-### List Stopped Containers
+## List Stopped Containers
 
 We can also see stopped containers, with the -a (--all) option.
 
@@ -116,7 +116,7 @@ CONTAINER_ID IMAGE          ... CREATED     STATUS
 b13c164401fb ubuntu         ... 55 min. ago Exited (130) 53 min. ago
 ```
 
-### View the Last Started Container
+## View the Last Started Container
 
 When many containers are already running, it can be useful to see only the last container that was started.
 This can be achieved with the **-l ("Last")** flag:
@@ -132,7 +132,7 @@ CONTAINER_ID IMAGE          ... CREATED          STATUS    ...
 068cc994ffd0 jpetazzo/clock ... 2 minutes ago Up 2 minutes ...
 ```
 
-### View Containers Logs
+## View Containers Logs
 
 Docker logs containers output.
 We can then view the collected logs by a container:
@@ -180,7 +180,7 @@ The commands can be combined to show the last 5 lines and then follow the logs:
 docker logs --tail 5 -f 0682392183219831209
 ```
 
-### Restart Containers
+## Restart Containers
 
 There are several ways to restart a container:
 

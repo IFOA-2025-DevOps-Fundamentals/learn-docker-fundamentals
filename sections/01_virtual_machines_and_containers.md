@@ -1,4 +1,4 @@
-## Virtual Machines & Containers
+# Virtual Machines & Containers
 ![vms_vs_containers.png](../assets/images/vms_vs_containers.png)
 
 In the world of virtualization and cloud computing, two primary technologies are widely used: **Virtual Machines (VMs)** and **Containers**. 

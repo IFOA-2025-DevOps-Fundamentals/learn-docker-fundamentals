@@ -13,6 +13,7 @@ The outline of the course is as follows:
 - [Virtual Machines & Containers](sections/01_virtual_machines_and_containers.md)
   - [Virtual Machines](sections/01_virtual_machines_and_containers.md#virtual-machines)
   - [Containers](sections/01_virtual_machines_and_containers.md#containers)
+  - [Why to Contain?](sections/01_virtual_machines_and_containers.md#why-to-contain)
   - [Main Containerization Technologies](sections/01_virtual_machines_and_containers.md#main-containerization-technologies)
   - [Key Differences & Comments](sections/01_virtual_machines_and_containers.md#key-differences--comments)
   - [Container History & First Experiments](sections/01_virtual_machines_and_containers.md#container-history--first-experiments)
@@ -32,6 +33,7 @@ The outline of the course is as follows:
   - [View the Last Started Container](sections/03_docker_commands.md#view-the-last-started-container)
   - [View Containers Logs](sections/03_docker_commands.md#view-containers-logs)
   - [Restart Containers](sections/03_docker_commands.md#restart-containers)
+  - [Let's Experiment!](sections/03_docker_commands.md#lets-experiment)
 
 - [Docker Images](sections/04_docker_images.md)
   - [Containers vs Images](sections/04_docker_images.md#containers-vs-images)
@@ -45,6 +47,7 @@ The outline of the course is as follows:
   - [Downloading Images](sections/04_docker_images.md#downloading-images)
   - [Images & Tags](sections/04_docker_images.md#images-and-tags)
   - [Images and Multiple Architecture](sections/04_docker_images.md#images-and-multiple-architectures)
+  - [Let's Experiment!](sections/04_docker_images.md#lets-experiment)
 
 - [Docker Networking & Volumes](sections/05_docker_networking_and_volumes.md)
   - [Networking](sections/05_docker_networking_and_volumes.md#networking)
@@ -52,8 +55,9 @@ The outline of the course is as follows:
 
 - [Docker Compose](sections/06_docker_compose.md#docker-compose)
   - [Docker Compose Usage](sections/06_docker_compose.md#docker-compose-usage)
+  - [Let's Experiment!](sections/06_docker_compose.md#lets-experiment)
 
-- [Build Our First Docker Application](sections/07_build_our_first_docker_app.md)
+- [Let's Experiment! Build Our First Docker Application](sections/07_build_our_first_docker_app.md)
   - [Dockerfile](sections/07_build_our_first_docker_app.md#dockerfile)
   - [Build the Container](sections/07_build_our_first_docker_app.md#build-the-container)
   - [Run the Container](sections/07_build_our_first_docker_app.md#run-the-container)

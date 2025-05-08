@@ -1,4 +1,4 @@
-## Let's Experiment! Build Our First Docker Application
+# Let's Experiment! Build Our First Docker Application
 
 In the myapp folder (stored in `assets/code/myapp`) there is a simple Python application that we are going to containerize using Docker.
 This project shows a demo implementation of a simple HTTP RESTful API with a single endpoint that returns a JSON response.
@@ -26,7 +26,7 @@ To simplify the building and the structure of the container the application has 
 This file is copied to the container and used by the application to read the default configuration. 
 A new configuration can be passed to the container using a volume at runtime (as we will see later).
 
-### Dockerfile
+## Dockerfile
 
 ```dockerfile
 FROM python:3.9-slim-buster
@@ -65,7 +65,7 @@ the logs, which is useful for real-time monitoring and debugging.
 >
 > **Without this variable we are not able to read the logs of the Python application**
 
-### Build the Container
+## Build the Container
 
 In order to build the container, we need to run the following command **in the same directory where the Dockerfile is located**.
 
@@ -118,7 +118,7 @@ The check the image you can run the following command:
 docker images
 ```
 
-### Run the Container
+## Run the Container
 
 Now that the image is built, we can run the container using the following parameters:
 
@@ -190,7 +190,7 @@ Now you can access the API using the following URL: [http://localhost:7070/api/i
 }
 ```
 
-### Run the Container with Configuration File
+## Run the Container with Configuration File
 
 Create a new file `test_conf.yaml` (there is one in the main folder) containing a changed configuration with a new `api_prefix` and a different `port` as follows:
 
@@ -223,7 +223,7 @@ This change in the configuration file is useful to show how to pass a configurat
 In this simple example, the configuration changes only the port and the API prefix but in a real application, the configuration file can contain more complex configurations.
 Furthermore, as previously mentioned the port mapping can be also done through the -p parameter and not only through the configuration file. <!-- ? In che senso l ultima frase? -->
 
-### Stop & Remove the Container
+## Stop & Remove the Container
 
 In order to stop and remove the container you can use the following commands:
 

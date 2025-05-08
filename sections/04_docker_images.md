@@ -1,4 +1,4 @@
-## Docker Images
+# Docker Images
 
 Now that we have the basics of Docker containers, let's move on to Docker images in order to understand how they work and how to manage them.
 Docker Image are a lightweight, standalone, and executable package that encapsulates all the necessary elements to run a piece of software, 
@@ -59,7 +59,7 @@ A visual representation of the main Pull and Push concepts together with the ide
 </div>
 
 
-### Containers vs Images
+## Containers vs Images
 
 <!-- TODO: Transform the following bullet point into a table -->
 - **Definition**:
@@ -90,7 +90,7 @@ From the **same image** we then can create **multiple containers**, each with it
 </div>
 
 
-### Object-Oriented Programming & Containers
+## Object-Oriented Programming & Containers
 
 It is possible to think of Docker containers as instances of a class in object-oriented programming.
 In object-oriented programming, a **class is a blueprint** for creating objects (instances) that share common attributes and behaviors.
@@ -106,7 +106,7 @@ Some points associated with this analogy are:
   - *Containers (Docker)*: Conceptually similar to instances in OOP.
   - *Explanation*: Containers are the dynamic, runnable instances created from Docker images. They represent the execution environment for applications, much like instances in OOP are specific occurrences of a class with unique states.
 
-### Creating a New Image
+## Creating a New Image
 
 To create a new image, we need to create a **Dockerfile** that contains the instructions for building the image.
 A Dockerfile is a text file containing instructions for building a Docker image. 
@@ -240,7 +240,7 @@ We can also Use the docker tag command to assign tags for versioning helping man
 docker tag myapp:latest myapp:v1.0
 ```
 
-### Images History
+## Images History
 
 To view the history of a Docker image, you can use the following command:
 
@@ -255,7 +255,7 @@ The output will be something like:
 </div>
 
 
-### Building & Caching
+## Building & Caching
 
 If you run the same build again, it will be instantaneous. Why?
 After each build step, Docker takes a snapshot of the resulting image.
@@ -275,7 +275,7 @@ RUN apt-get update is not re-executed when the mirrors are updated <!-- ? Cosa s
 
 You can force a rebuild with docker build `--no-cache` (e.g., `docker build --no-cache -t myapp:latest .`).
 
-### Namespaces & Images Management
+## Namespaces & Images Management
 
 Docker uses namespaces to provide isolation and security for containers.
 There are three main namespaces:
@@ -299,13 +299,14 @@ Images can be stored:
 - In a Docker registry
 
 You can use the Docker client to download (pull) or upload (push) images.
+
 >[!NOTE]
 > 
 > To be more accurate: you can use the Docker ***client*** to tell a Docker ***Engine*** to push and pull images to and from a registry.
 
 There are different Docker Registries and you can also have your own registry for example using external services such as GitLab that provides the possibility to push and pull your container images on a dedicated registry with both private and public access.
 
-### Listing Available Images
+## Listing Available Images
 
 To list the available images on your Docker host, you can use the following command:
 
@@ -329,7 +330,7 @@ training/namer latest 902673acc741 9 months ago  289.3 MB
 jpetazzo/clock latest 12068b93616f 12 months ago 2.433 MB
 ```
 
-### Searching for Images
+## Searching for Images
 
 We cannot list all images on a remote registry, but we can search for a specific keyword:
 - **Stars**: indicate the popularity of the image.
@@ -356,7 +357,7 @@ ubuntu-debootstrap              debootstrap --variant=minbase --components...   
 nuagebec/ubuntu                 Simple always updated Ubuntu docker images...   24      [OK]
 ```
 
-### Downloading Images
+## Downloading Images
 
 Images can be built from scratch or pulled from a registry.
 Downloading an image is called pulling an image.
@@ -392,7 +393,7 @@ d0e7f81ca65c: Pull complete
 As you can see, the image is pulled from the `library/ubuntu` repository, which is the default repository for official images.
 And layers are downloaded one by one and then the image is downloaded and ready to be used.
 
-### Images and Tags
+## Images and Tags
 
 Images can have tags to differentiate between different versions or configurations of the same image.
 Tags define image versions or variants.
@@ -412,7 +413,7 @@ As best practice we can follow some (simple) guidelines for tagging images:
 
 This is similar to what we would do with pip install, npm install, etc.
 
-### Images and Multiple Architectures
+## Images and Multiple Architectures
 
 Docker images can be built for different architectures.
 For example, an image can be built for both x86 and ARM architectures or it can be built for a specific architecture.
@@ -435,4 +436,4 @@ docker pull --platform linux/arm64 arm64v8/ubuntu:latest
 ```
 
 ## Let's Experiment!
-Test the viewed commands using the command line or the command line offered by Docker Desktop! 
+Test the viewed commands using the command line or the command line offered by Docker Desktop!

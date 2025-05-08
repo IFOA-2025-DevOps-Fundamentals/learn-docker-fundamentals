@@ -1,4 +1,4 @@
-## Docker Compose
+# Docker Compose
 
 There are scenarios where we need to run multiple containers that work together to provide a complete application.
 Handling multiple containers can be complex, especially when we need to manage their dependencies and configurations.
@@ -137,7 +137,7 @@ As additional notes:
 - You can adjust the paths and environment variables as needed for your specific setup.
 - To bring up the application, run `docker-compose up` (or `docker compose up`) in the directory containing this Docker Compose file (See next Sub-Sections).
 
-### Docker Compose Usage
+## Docker Compose Usage
 
 Run the application described in the compose file
 
