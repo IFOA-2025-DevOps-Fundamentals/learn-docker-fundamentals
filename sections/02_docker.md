@@ -48,7 +48,13 @@ An example of the Docker Desktop GUI is shown below:
 <div align="center">
     <img src="../assets/images/docker_desktop.png">
 </div>
-
+<div align="center">
+    <figcaption>
+        <em>Docker Desktop overview.</em>
+        <br>
+        <br>
+    </figcaption>
+</div>
 
 ### Create First Container
 
@@ -72,6 +78,13 @@ The output of the command will be like:
 
 <div align="center">
     <img src="../assets/images/docker_hello_world.png" width="600">
+</div>
+<div align="center">
+    <figcaption>
+        <em>Docker hello_world example.</em>
+        <br>
+        <br>
+    </figcaption>
 </div>
 
 
@@ -137,8 +150,13 @@ The output will be:
 
 <div align="center">
     <img src="../assets/images/figlet_hello.png" width="500">
-    <br>
-    <br>
+</div>
+<div align="center">
+    <figcaption>
+        <em>Docker figlet result example.</em>
+        <br>
+        <br>
+    </figcaption>
 </div>
 
 

@@ -20,8 +20,13 @@ A visual text based representation of the layered architecture is shown below:
 
 <div align="center">
   <img src="../assets/images/docker_layers.png" width="500">
-  <br>
-  <br>
+</div>
+<div align="center">
+    <figcaption>
+        <em>Docker Image layered architecture.</em>
+        <br>
+        <br>
+    </figcaption>
 </div>
 
 
@@ -54,8 +59,13 @@ A visual representation of the main Pull and Push concepts together with the ide
 
 <div align="center">
   <img src="../assets/images/docker_image_push_pull.png" width="600">
-  <br>
-  <br>
+</div>
+<div align="center">
+    <figcaption>
+        <em>Docker workflow, from image creation to its deployment.</em>
+        <br>
+        <br>
+    </figcaption>
 </div>
 
 
@@ -85,8 +95,13 @@ From the **same image** we then can create **multiple containers**, each with it
 
 <div align="center">
   <img src="../assets/images/same_image_multiple_containers.png" width="600">
-  <br>
-  <br>
+</div>
+<div align="center">
+    <figcaption>
+        <em>Same Docker image, multiple Docker containers.</em>
+        <br>
+        <br>
+    </figcaption>
 </div>
 
 
@@ -250,8 +265,17 @@ docker history <image_name>:<tag>
 
 
 The output will be something like:
+
+
 <div align="center">
   <img src="../assets/images/image_history.png" width="600">
+</div>
+<div align="center">
+    <figcaption>
+        <em>Docker image history.</em>
+        <br>
+        <br>
+    </figcaption>
 </div>
 
 

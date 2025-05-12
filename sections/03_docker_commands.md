@@ -1,4 +1,5 @@
 # Docker Commands
+
 ## Local Development & Working Environment
 
 When we use local VMs (with e.g. VirtualBox or VMware), our workflow looks like this:
@@ -206,4 +207,4 @@ As previously explained some of these commands and options effective and availab
 ## Let's Experiment!
 >[!TIP]
 > 
-> Test Docker commands using the `jpetazzo/clock` image! 
+> Test Docker commands using the `jpetazzo/clock` image!

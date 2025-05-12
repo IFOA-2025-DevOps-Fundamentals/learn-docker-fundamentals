@@ -1,5 +1,17 @@
 # Virtual Machines & Containers
-![vms_vs_containers.png](../assets/images/vms_vs_containers.png)
+
+
+<div align="center">
+    <img src="../assets/images/vms_vs_containers.png" />
+</div>
+<div align="center">
+    <figcaption>
+        <em>Comparison between Virtual Machines and Container technologies.</em>
+        <br>
+        <br>
+    </figcaption>
+</div>
+
 
 In the world of virtualization and cloud computing, two primary technologies are widely used: **Virtual Machines (VMs)** and **Containers**. 
 Both have their unique characteristics and different use cases. 

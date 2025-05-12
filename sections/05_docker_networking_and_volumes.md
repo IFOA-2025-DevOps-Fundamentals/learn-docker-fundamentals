@@ -1,4 +1,5 @@
 # Docker Networking & Volumes
+
 ## Networking
 
 Containers run in isolated environments but may need to communicate with each other or external systems.
@@ -27,9 +28,15 @@ A visual representation of the default bridge network is shown below:
 
 <div align="center">
   <img src="../assets/images/docker_networking_bridge.png" width="700">
-  <br>
-  <br>
 </div>
+<div align="center">
+    <figcaption>
+        <em>Docker network and port mapping.</em>
+        <br>
+        <br>
+    </figcaption>
+</div>
+
 
 
 The bridge allows containers to communicate with each other, but ***not with the host machine or external systems***. <!-- ? Contraddice il punto sotto? -->
