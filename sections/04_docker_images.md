@@ -248,8 +248,8 @@ As previously presented we can execute the docker build command to create the Do
 docker build -t myapp:latest .
 ```
 
-The Docker image is built layer by layer, following the instructions in the Dockerfile
-We can also Use the docker tag command to assign tags for versioning helping managing and track changes in the image over time.
+The Docker image is built layer by layer, following the instructions in the Dockerfile.
+We can also use the docker tag command to assign tags for versioning helping managing and track changes in the image over time.
 
 ```bash
 docker tag myapp:latest myapp:v1.0
