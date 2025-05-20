@@ -133,7 +133,7 @@ The above portion of the configuration defines a custom bridge network named `my
 
 As additional notes: 
 
-- Ensure the `./app`, `./config`, and `./db_data` directories ***exist on your host machine***.
+- Ensure the `./config`, and `./db_data` directories ***exist on your host machine***.
 - You can adjust the paths and environment variables as needed for your specific setup.
 - To bring up the application, run `docker-compose up` (or `docker compose up`) in the directory containing this Docker Compose file (See next Sub-Sections).
 
